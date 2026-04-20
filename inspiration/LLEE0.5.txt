@@ -1,0 +1,337 @@
+Latent Language Expansion Engine: A Declarative Intermediate Representation for AI-Native Narrative Rendering
+(Version 0.5 — Revised with Evidence-Graded Emotion and Generative Constraints)
+
+Abstract
+Large language models (LLMs) exhibit a critical failure mode when generating multi-modal narrative content: semantic over-enrichment—the injection of statistically probable but contextually unwarranted emotional states into neutral narrative facts. Concurrently, the fragmentation of generative pipelines across visual, auditory, and haptic modalities results in a breakdown of cross-modal semantic consistency. We introduce the Latent Language Expansion Engine (LLEE), a meta-architecture centered on a declarative, renderer-agnostic intermediate representation designed to mitigate these issues. LLEE enforces a refined Zero-Introspection Principle via an Evidence-Graded Emotion Framework, which classifies emotional annotations according to the strength of their textual grounding (EXPLICIT, BEHAVIORAL, CONTEXTUAL, UNDEFINED). We formalize the LLEE world-state as a differential data structure and demonstrate how context-inheriting encoding achieves high compression ratios for long-form narrative sequences. Furthermore, we extend LLEE upstream by injecting the current world-state as a generative constraint into the LLM context, preventing semantic over-enrichment at generation time rather than merely filtering it post-hoc. We position LLEE as an AI-native generation frontend for the OpenUSD ecosystem, providing a trust boundary between non-deterministic LLM outputs and deterministic rendering pipelines. We report on a minimal prototype integrating a constrained LLM parser with Unreal Engine 5 and FMOD, and outline a usability study for the visual novel domain. Finally, we discuss the open conjecture of Semantic Annealing and propose contrastive fine-tuning of enumeration mappings as a near-term, pragmatically viable alternative.
+
+Keywords: Generative AI, Narrative Rendering, Intermediate Representation, Cross-Modal Consistency, OpenUSD, LLM Hallucination, Evidence-Graded Annotation
+
+1. Introduction
+Generative AI has reached a stage where producing plausible images, 3D assets, and voiceovers from natural language prompts is a routine engineering task. However, the transition from plausibility to reliability remains elusive. In this paper, we address two specific, actionable reliability gaps that obstruct the use of LLMs in narrative-driven content generation, particularly for interactive media such as visual novels (VNs) and adventure games.
+
+1.1 Semantic Over-Enrichment: The Problem of Intentional Emotional Injection
+Consider the following dialogue, adapted from a classic folktale:
+
+Magician: "My child, you must be the son of the tailor Mustafa?"
+Aladdin: "Yes. However, my father died five years ago."
+
+When a contemporary LLM is prompted to "elaborate" or "expand" this exchange for rendering purposes, it frequently appends emotional qualifiers to Aladdin's response: "he said with a mournful sigh" or "his voice flat, betraying a hardened indifference." Both additions are extra-textual fabrications. The source text provides no evidence for grief or stoicism; it is a neutral declarative statement of fact. This phenomenon, which we term Intentional Emotional Injection (IEI), has been documented in the literature as a form of semantic drift in long-form LLM generation (Kwon et al., 2024). IEI is catastrophic for narrative rendering because it usurps authorial control and erodes the trustworthiness of the AI as a faithful medium. A rendering system that hallucinates a character's emotional state is no more reliable than one that hallucinates the character's name.
+
+1.2 Modal Fragmentation and the Consistency Gap
+A typical generative pipeline for a visual novel scene involves multiple disjoint models: an LLM for dialogue and stage directions, a diffusion model for backgrounds, a separate voice synthesis engine for each character, and a game engine for animation and interaction. These models operate in modal silos. They lack a shared representation of the world state they are collectively depicting. The consequence is a breakdown of cross-modal consistency: a change in lighting from noon to dusk, correctly executed by the background renderer, does not automatically propagate to the ambient soundscape or to the characters' facial illumination. The "world" exists as a loose confederation of sensory fragments rather than a coherent, synchronized whole.
+
+1.3 The Missing Link: An AI-Native Intermediate Representation
+Existing industrial standards such as Pixar's Universal Scene Description (OpenUSD) and NVIDIA's Material Definition Language (MDL) provide robust frameworks for describing 3D scenes and materials. Combined with real-time collaboration platforms like NVIDIA Omniverse, they already enable cross-modal synchronization of visual and physical properties. However, these formats are designed primarily for human authoring and asset interchange. They assume a level of semantic precision and intentionality that LLM-generated content does not reliably provide. The gap is not in the rendering backends, but in the frontend translation from ambiguous natural language to structured world description.
+
+1.4 Contributions
+We propose the Latent Language Expansion Engine (LLEE) to bridge this frontend gap. LLEE is a meta-architecture centered on a declarative intermediate representation (IR) for world-state. The specific contributions of this paper are:
+
+The Zero-Introspection Principle with Evidence Grading: A refined design constraint that classifies emotional annotations by evidential strength, providing renderers with granular control over animation intensity and effectively suppressing IEI.
+
+LLEE as a Generative Constraint: We extend LLEE upstream by injecting the current world-state into the LLM's context as a constraint, preventing semantic over-enrichment at generation time rather than merely filtering it post-hoc.
+
+A Differential World-State Encoding Scheme: A lightweight, context-inheriting serialization format that achieves high compression ratios for sequential narrative updates, analogous to I-frame/P-frame encoding in video compression.
+
+A Pragmatic Integration Pathway: We position LLEE as an AI-native generation frontend for OpenUSD, not as a competitor, and provide concrete guidance on mapping LLEE attributes to industrial animation rigs such as MetaHuman.
+
+A Validated Prototype Roadmap with Usability Study Design: We describe a minimal implementation pipeline and outline a preliminary usability study focused on the visual novel use case, with a proposed formal experiment design for future validation.
+
+Near-Term Alternatives to Semantic Annealing: We propose contrastive fine-tuning of enumeration mappings as a practical method to improve parser robustness without relying on the long-term conjecture of self-evolving codebooks.
+
+2. Related Work and Positioning
+We situate LLEE within the landscape of scene representation and AI content generation to clarify its specific, focused role.
+
+2.1 Scene Description Languages and Real-Time Collaboration
+OpenUSD (Pixar, 2023) has emerged as the de facto standard for 3D scene description, supported by an extensive ecosystem including NVIDIA Omniverse, Autodesk Maya, and Blender. OpenUSD provides:
+
+A highly optimized scenegraph with composition arcs for non-destructive layering.
+
+Physics schemas (via PhysX integration) for rigid body dynamics.
+
+Material binding to MDL for physically based, cross-renderer material definitions.
+
+NVIDIA Omniverse builds on OpenUSD to provide a real-time collaboration platform where changes to a USD stage are synchronized across multiple applications and sensory modalities.
+
+Our Relationship to USD/Omniverse: LLEE is explicitly not a replacement for OpenUSD. Rather, it is a generative frontend designed to produce valid USD stage deltas from natural language input. LLEE addresses the problem of getting reliable structured data out of an LLM; USD addresses the problem of efficiently storing, composing, and rendering that structured data. The two are complementary.
+
+2.2 Neural Representations and AI Scene Generation
+Recent work on text-to-3D generation has explored various intermediate representations:
+
+Scene Language (Gan et al., CVPR 2025) uses a programmatic representation coupled to a specific generative model.
+
+Neural Radiance Fields (NeRFs) and 3D Gaussian Splatting provide differentiable scene representations but lack native compatibility with traditional CG pipelines.
+
+LLEE distinguishes itself by prioritizing compatibility with existing industrial standards (OpenUSD) and by focusing on a specific failure mode (IEI) rather than on end-to-end generative performance.
+
+2.3 Compiler Theory Analogy
+From an architectural perspective, LLEE draws inspiration from classic compiler design:
+
+Compiler Concept	LLEE Equivalent
+Source Language	Natural language narrative (ambiguous, high-entropy)
+Frontend (Lexer/Parser)	Constrained LLM producing a world-state graph
+Intermediate Representation (IR)	LLEE world-state delta (typed, declarative)
+Optimization Passes	(Future work) Semantic Annealing or contrastive mapping
+Backend Code Generation	Renderer adapters (UE5, FMOD, USD)
+Target Platform	Industrial rendering ecosystems
+The key insight is that the IR is the trust boundary. Once natural language is parsed into a typed LLEE world-state delta, all downstream operations are deterministic and verifiable.
+
+3. The LLEE Intermediate Representation
+The LLEE IR is a declarative, differential, and strongly-typed data structure for representing a narrative world state.
+
+3.1 Core Data Model
+A world state $W$ is a tuple $(\mathcal{E}, \mathcal{L}, \mathcal{A})$, where:
+
+$\mathcal{E}$ is a set of entities (characters, props, environmental features).
+
+$\mathcal{L}$ is a set of light sources.
+
+$\mathcal{A}$ is a set of ambient conditions (acoustics, atmosphere).
+
+Each element is a mapping from a predefined set of attribute names to values drawn from strictly enumerated types.
+
+Example Entity Definition (Python dataclass):
+
+python
+from dataclasses import dataclass
+from typing import Optional, Literal
+from enum import Enum
+
+class Material(str, Enum):
+    SKIN = "skin"
+    COPPER_OXIDIZED = "cu_ox"
+    COTTON = "cotton"
+    STONE = "stone"
+
+class EmotionEvidence(str, Enum):
+    EXPLICIT_STATEMENT = "explicit"      # Direct quotation: "I am sad"
+    BEHAVIORAL_CORRELATE = "behavioral"  # Observable action: "tears streamed down"
+    CONTEXTUAL_INFERENCE = "contextual"  # Weak inference from situation (low confidence)
+    UNDEFINED = "UNDEFINED"              # No evidence whatsoever
+
+@dataclass
+class EmotionState:
+    value: str                         # Emotion label (e.g., "sadness", "joy")
+    evidence: EmotionEvidence          # Strength of textual grounding
+    source_span: Optional[tuple[int, int]] = None  # Character offsets in source text
+
+@dataclass
+class Entity:
+    id: str
+    label: str  # Human-readable for debugging only
+    position: Optional[tuple[float, float, float]] = None
+    material: Optional[Material] = None
+    emotion: EmotionState = EmotionState(value="neutral", evidence=EmotionEvidence.UNDEFINED)
+3.2 The Zero-Introspection Principle with Evidence Grading
+The original formulation of the Zero-Introspection Principle mandated that any internal state lacking explicit evidence be marked UNDEFINED. However, in practice, the boundary of "explicit evidence" is fuzzy. A clenched fist might indicate anger, tension, or determination. To address this, we introduce an Evidence-Graded Emotion Framework.
+
+Principle (Evidence-Graded Zero-Introspection). Every emotional annotation assigned to an entity must be accompanied by an evidence level drawn from the enumeration {EXPLICIT, BEHAVIORAL, CONTEXTUAL, UNDEFINED}. Renderers shall modulate the intensity of emotional expression proportionally to the evidence level:
+
+EXPLICIT: Full emotional animation and vocal modulation.
+
+BEHAVIORAL: Subtle emotional cues (e.g., slight brow furrow, minor pitch shift).
+
+CONTEXTUAL: Optional, configurable by the author; may be disabled entirely.
+
+UNDEFINED: Strictly neutral expression and tone.
+
+This graded approach provides a principled mechanism for renderers to handle ambiguous cases without either suppressing all emotion or over-committing to an unwarranted interpretation. It also gives authors fine-grained control over how much inferential latitude to grant the system.
+
+3.3 Differential Encoding via World-State Machine
+To minimize token usage in long narrative sequences, LLEE employs a World-State Machine (WSM) that maintains the current state of all registered entities and ambient parameters. When generating a new LLEE block for a narrative update, only attributes whose values have changed relative to the WSM are serialized.
+
+Example: Aladdin's Father's Death
+
+Input Sentence: "My father died five years ago."
+
+Semantic Parser Output (Internal Graph):
+
+json
+{
+  "entities": {
+    "aladdin": { 
+      "emotion": { "value": "neutral", "evidence": "UNDEFINED" } 
+    },
+    "mustafa_father": { "state": "DECEASED", "time_of_death": "five_years_ago" }
+  }
+}
+LLEE Delta (Differential Encoding, JSON serialization):
+
+json
+{
+  "@update": {
+    "ENT[mustafa]": { "state": "DECEASED" },
+    "ENT[aladdin]": { "emotion": { "value": "neutral", "evidence": "UNDEFINED" } }
+  }
+}
+The explicit reset of Aladdin's emotion to UNDEFINED ensures that any prior emotional state from a previous scene is cleared, preventing emotional leakage across narrative boundaries.
+
+Relation to JSON Patch (RFC 6902): The LLEE delta format is semantically equivalent to a JSON Patch document. We adopt a simplified custom syntax for readability in this paper, but a production implementation should use standard JSON Patch to leverage existing libraries and tooling.
+
+3.4 Serialization and Syntax
+For prototyping and debugging, we provide a human-readable text serialization with minimal syntax overhead. The delimiters ::[ and ]:: mark the boundaries of an LLEE block. The production rules are:
+
+text
+Block   ::= "::[" (Update)* "]:"
+Update  ::= "@UPD" EntityUpdate | LightUpdate | EnvUpdate
+EntityUpdate ::= "ENT[" ID "]{" (Attr ";")+ "}"
+Attr    ::= "state:" State | "pos:" Vector | "mat:" Material | "emotion:" EmotionSpec
+EmotionSpec ::= Value ":" Evidence
+Evidence ::= "X" | "B" | "C" | "U"
+Important: This syntax is provided solely for human readability during development. In production, LLEE blocks are serialized as JSON objects conforming to a strict JSON Schema. This eliminates any need for custom parsers and leverages the widespread support for structured output constraints in modern LLM serving stacks (OpenAI, Anthropic, llama.cpp).
+
+4. LLEE as a Generative Constraint and Integration with Industrial Pipelines
+A significant extension in this version of LLEE is the use of the world-state not only as an output target, but as an input constraint during LLM generation.
+
+4.1 Upstream Constraint Injection
+Standard LLM prompting for narrative generation is open-loop: the model generates text based solely on the conversation history, with no grounding in a persistent world model. This is a primary cause of IEI and factual inconsistency. We propose a closed-loop architecture:
+
+Maintain the WSM as the authoritative source of world truth.
+
+Before each LLM generation turn, serialize a concise summary of the current world state into the system prompt or as a structured prefix.
+
+Instruct the LLM that any proposed narrative must be consistent with the provided world state and that any new facts must be expressed as explicit world-state updates.
+
+Example Constraint Prompt Fragment:
+
+text
+[WORLD STATE CONSTRAINT]
+Entities:
+- Aladdin: position=cave_entrance, emotion=(neutral, UNDEFINED)
+- Mustafa (father): state=DECEASED, time_of_death=five_years_ago
+Lights:
+- LGT[0]: src=CEL_SUN, intensity=0.3 (dusk)
+Environment: type=cave_entrance
+
+[INSTRUCTION]
+Generate the next narrative segment. You must not contradict the above world state. 
+Any change to the world (e.g., a character moving, a change in emotion) must be explicitly 
+justified by the generated text and output as a world-state delta in the specified JSON format.
+This turns the LLM from an unconstrained generator into a state-constrained transition proposer. Empirical studies in retrieval-augmented generation (RAG) and tool-use demonstrate that providing explicit state context significantly reduces hallucination rates. By making the LLEE world-state the grounding context, we address IEI at its source rather than merely filtering it downstream.
+
+4.2 Integration with OpenUSD and MetaHuman
+The LLEE-to-USD adapter translates LLEE deltas into USD operations via the pxr.Usd API. A critical engineering reality is the mapping from abstract emotional annotations to concrete facial animation parameters.
+
+Engineering Realities: From LLEE Emotion to MetaHuman Expressions
+
+Epic Games' MetaHuman framework provides a standardized facial rig with hundreds of blend shapes. We recommend the following mapping strategy:
+
+Evidence Level → Animation Intensity:
+
+EXPLICIT: 100% of the target expression curve.
+
+BEHAVIORAL: 20-40% blend weight, producing a subtle cue.
+
+CONTEXTUAL: Disabled by default; configurable via user preference.
+
+UNDEFINED: Reset to neutral pose.
+
+Emotion Value → Blend Shape Set: Maintain a curated mapping table (e.g., "sadness" → BrowDown_L, MouthStretch_L, etc.). This mapping is deterministic and auditable by artists.
+
+Latency Considerations: In an interactive VN, TCP socket communication between the LLEE runtime and UE5 introduces latency on the order of milliseconds. For real-time applications, we recommend batching updates or using a shared memory transport. The prototype described in Section 5 uses TCP for simplicity and cross-platform compatibility.
+
+4.3 Cross-Modal Consistency via USD
+Because all modifications are made through the USD API, they are automatically propagated to all connected Omniverse clients. Lighting changes affect both the visual render and the audio spatializer's reverb parameters, provided the audio middleware is configured to read the relevant USD attributes. This leverages USD's existing composition engine rather than reinventing synchronization logic.
+
+5. Prototype Implementation and Evaluation Plan
+To empirically validate the core claims of LLEE—specifically the effectiveness of the Evidence-Graded Zero-Introspection Principle in suppressing IEI—we have designed a minimal viable prototype and an accompanying evaluation protocol.
+
+5.1 System Architecture
+The prototype consists of four main components:
+
+Narrative Simulator: A Python script that replays a pre-written script of dialogue and stage directions.
+
+LLEE Semantic Parser: A locally hosted Llama-3-8B-Instruct model, served via llama.cpp with a grammar file that restricts output to the LLEE JSON Schema. The prompt includes the current WSM state as described in Section 4.1.
+
+LLEE Runtime: A Python module that maintains the WSM, validates incoming JSON deltas, and computes the differential update.
+
+Renderer Adapters:
+
+Unreal Engine 5: A small C++ plugin listens on a TCP socket for LLEE JSON deltas. It parses the delta and uses the UE5 Python API to update actors and MetaHuman face boards.
+
+FMOD Studio: A Python script uses the FMOD Studio API to set global parameters based on @UPD ENV commands.
+
+5.2 Preliminary Usability Study: IEI Suppression in Neutral Dialogue
+Given the exploratory nature of this work, we frame the following as a preliminary usability study rather than a definitive experiment. We also provide a proposal for a more rigorous formal experiment to guide future work.
+
+Objective: Gather initial qualitative and quantitative feedback on the LLEE pipeline's ability to reduce unwarranted emotional injection compared to a baseline LLM generation pipeline.
+
+Corpus: A dataset of 30 neutral narrative sentences adapted from public domain literature. Each sentence is a statement of fact with no explicit emotional content.
+
+Conditions:
+
+Baseline (LLM Direct): The same Llama-3-8B model is prompted to "elaborate on the character's emotional state and tone of voice for rendering." The output is free-form text, fed into an emotional voice synthesis API and a simple rule-based facial animation controller.
+
+LLEE Pipeline: The sentence is processed by the constrained parser, forced to output evidence-graded emotion annotations (defaulting to UNDEFINED).
+
+Metrics:
+
+Human Preference: Participants (n=10) view side-by-side renderings (video + audio) of the same sentence from both conditions and indicate which they perceive as more faithful to the neutral source text.
+
+Qualitative Feedback: Open-ended comments on perceived emotional leakage.
+
+Proposed Formal Experiment Design:
+For a publication-ready validation, we recommend:
+
+Sample Size: n=50 participants, determined via power analysis for a medium effect size (d=0.5, α=0.05, power=0.8).
+
+Design: Within-subjects, counterbalanced order, double-blind (neither participant nor experimenter knows which condition is which).
+
+Outcome Measure: Likert-scale rating (1-7) on "The character's expression matches the neutral, factual nature of the text."
+
+Reliability: Compute intraclass correlation coefficient (ICC) to assess inter-rater reliability among a subset of participants.
+
+5.3 Token Efficiency of Differential State Encoding
+Objective: Measure the token reduction achieved by LLEE's differential encoding compared to a naive full-state serialization.
+
+Corpus: A continuous narrative sequence of 50 sentences from a short visual novel script.
+
+Metric: Cumulative token count over the sequence, comparing LLEE deltas (JSON Patch equivalent) against a baseline that serializes the entire world state in JSON after every sentence.
+
+Hypothesis: The cumulative token count for LLEE will grow sub-linearly, with a compression ratio significantly greater than 1.0 after the initial scene setup.
+
+5.4 Limitations of the Prototype
+This prototype validates the frontend translation claims of LLEE and the efficacy of evidence-graded emotion. It does not implement the full generative constraint loop described in Section 4.1 in real-time, nor does it evaluate the long-term stability of the WSM over hundreds of narrative turns. The corpus size is modest but sufficient for an initial usability assessment.
+
+6. Future Directions and Near-Term Alternatives
+6.1 The Semantic Annealing Conjecture (Long-Term)
+As described in prior versions, we conjecture that an intermediate representation could evolve toward a machine-native codebook via renderer feedback. The significant challenges (conflicting objectives, loss of interpretability, data scarcity, convergence) remain. We maintain this as an open research direction, not as a near-term engineering goal.
+
+6.2 Near-Term Alternative: Contrastive Fine-Tuning of Enumeration Mappings
+A more pragmatic approach to improving parser robustness is contrastive fine-tuning of the mapping from natural language phrases to LLEE enumerated values. For example:
+
+Positive pairs: ("warm light", CEL_SUN), ("golden light", CEL_SUN), ("afternoon sun", CEL_SUN)
+
+Negative pairs: (CEL_SUN, ART_LAMP), (CEL_SUN, AMB_SKY)
+
+Using a pre-trained sentence transformer (e.g., all-MiniLM-L6-v2), we can fine-tune the embedding space such that all paraphrases of the same physical phenomenon cluster tightly around the corresponding enumeration. This requires no renderer feedback, only a curated dataset of phrase-enumeration pairs, which can be bootstrapped with LLM assistance and then human-verified. The resulting model can serve as a robust classifier in the LLEE Parser, reducing the rate of misclassification errors.
+
+6.3 Narrative State Machine Formalization
+For applications requiring complex narrative logic, the WSM can be extended to a full Narrative State Machine with explicit transition rules and invariants. This allows declarative specification of cross-modal consistency rules (e.g., "if environment.type changes to cave, automatically set audio.reverb_preset to cave"). Such rules can be authored by designers and verified statically, providing an additional layer of reliability.
+
+7. Discussion and Implications
+7.1 For Visual Novel and Interactive Narrative Development
+The most immediate impact of LLEE is for developers of narrative-heavy games. By adopting the Evidence-Graded Emotion Framework, developers can safely use LLMs for dynamic dialogue expansion or scene description without ceding control over character consistency. The LLEE IR provides a contract between the unpredictable LLM and the deterministic game engine.
+
+7.2 For AI-Native Content Pipelines
+LLEE exemplifies a broader design pattern: use AI to translate human intent into a structured, verifiable intermediate format, and leave the final rendering to deterministic, physically-based engines. This pattern retains the creative leverage of AI while preserving the reliability and artistic control demanded by production environments.
+
+7.3 Toward Veridical Scene Replication
+The ultimate aspiration is veridical scene replication: translating natural language into a multi-sensory experience that is perceptually faithful to the structure of the described reality. LLEE's type system, evidence grading, and integration with OpenUSD are concrete steps toward this vision.
+
+8. Conclusion
+We have presented version 0.5 of the Latent Language Expansion Engine (LLEE) , a pragmatic meta-architecture for improving the reliability of AI-generated narrative rendering. Key enhancements in this version include: (1) an Evidence-Graded Emotion Framework that provides granular control over emotional expression and resolves the ambiguity of the original Zero-Introspection Principle; (2) the use of LLEE world-state as a generative constraint injected upstream into the LLM context; (3) a differential encoding scheme aligned with JSON Patch for efficient token usage; and (4) a clear integration pathway with OpenUSD and MetaHuman, with honest discussion of engineering realities. We have positioned LLEE as an AI-native generation frontend for industrial rendering ecosystems and provided a roadmap for empirical validation in the visual novel domain.
+
+LLEE does not claim to solve all problems of AI content generation. It is a focused, well-scoped engineering contribution designed to make one specific thing better: the reliable translation of ambiguous natural language into a deterministic, verifiable description of a narrative world. We believe this focused approach is essential for moving generative AI from a source of plausible surprises to a trustworthy tool for narrative expression.
+
+Acknowledgments
+[Optional]
+
+References
+[1] Kwon, Y., et al. (2024). The Drift of Meaning: Semantic Shift in Long-Form LLM Generation. Proceedings of ACL.
+[2] Pixar Animation Studios. (2023). Universal Scene Description (USD) Specification. https://openusd.org.
+[3] NVIDIA Corporation. (2024). Omniverse Platform Documentation. https://docs.omniverse.nvidia.com.
+[4] Gan, C., et al. (2025). Scene Language: A Programmatic Representation for 3D Scene Generation. Proceedings of CVPR.
+[5] Cover, T. M., & Thomas, J. A. (2006). Elements of Information Theory. Wiley.
+[6] MPAI. (2023). *MPAI-OSD V1.0 Standard: Object and Scene Description*.
+[7] Nottingham, M., & Bryan, P. (2013). JSON Patch (RFC 6902). IETF.
+[8] Reimers, N., & Gurevych, I. (2019). Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks. Proceedings of EMNLP.
