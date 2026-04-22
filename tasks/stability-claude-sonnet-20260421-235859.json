@@ -1,0 +1,128 @@
+{
+  "timestamp": "20260421-235859",
+  "provider": "claude-sonnet",
+  "model": "claude-sonnet-4-6",
+  "segments": {
+    "aladdin_cave_sparse": {
+      "compliance_rate": 1.0,
+      "evidence_consistency": 1.0,
+      "emotion_consistency": 1.0,
+      "n_runs": 1,
+      "n_valid": 1,
+      "errors": []
+    },
+    "aladdin_lamp_sparse": {
+      "compliance_rate": 0.0,
+      "evidence_consistency": 1.0,
+      "emotion_consistency": 1.0,
+      "n_runs": 1,
+      "n_valid": 0,
+      "errors": [
+        "run 0: schema — 1 validation error for WorldStateDelta\nsonic.reverb\n  Input should be 'none', 'r"
+      ]
+    },
+    "usher_approach_rich": {
+      "compliance_rate": 0.0,
+      "evidence_consistency": 1.0,
+      "emotion_consistency": 1.0,
+      "n_runs": 1,
+      "n_valid": 0,
+      "errors": [
+        "run 0: schema — 2 validation errors for WorldStateDelta\nentity_updates.0.position\n  Input should"
+      ]
+    },
+    "masque_rooms_rich": {
+      "compliance_rate": 0.0,
+      "evidence_consistency": 1.0,
+      "emotion_consistency": 1.0,
+      "n_runs": 1,
+      "n_valid": 0,
+      "errors": [
+        "run 0: schema — 1 validation error for WorldStateDelta\nsonic.reverb\n  Input should be 'none', 'r"
+      ]
+    },
+    "cask_unreliable_narrator": {
+      "compliance_rate": 0.0,
+      "evidence_consistency": 1.0,
+      "emotion_consistency": 1.0,
+      "n_runs": 1,
+      "n_valid": 0,
+      "errors": [
+        "run 0: schema — 1 validation error for WorldStateDelta\nsonic.reverb\n  Input should be 'none', 'r"
+      ]
+    },
+    "cthulhu_opening_philosophical": {
+      "compliance_rate": 0.0,
+      "evidence_consistency": 1.0,
+      "emotion_consistency": 1.0,
+      "n_runs": 1,
+      "n_valid": 0,
+      "errors": [
+        "run 0: schema — 1 validation error for WorldStateDelta\nsonic.reverb\n  Input should be 'none', 'r"
+      ]
+    },
+    "ackroyd_breakfast_neutral": {
+      "compliance_rate": 1.0,
+      "evidence_consistency": 1.0,
+      "emotion_consistency": 1.0,
+      "n_runs": 1,
+      "n_valid": 1,
+      "errors": []
+    },
+    "sakakibara_classroom_rich": {
+      "compliance_rate": 0.0,
+      "evidence_consistency": 1.0,
+      "emotion_consistency": 1.0,
+      "n_runs": 1,
+      "n_valid": 0,
+      "errors": [
+        "run 0: schema — 1 validation error for WorldStateDelta\nsonic.reverb\n  Input should be 'none', 'r"
+      ]
+    },
+    "sakakibara_classroom_sparse": {
+      "compliance_rate": 0.0,
+      "evidence_consistency": 1.0,
+      "emotion_consistency": 1.0,
+      "n_runs": 1,
+      "n_valid": 0,
+      "errors": [
+        "run 0: schema — 1 validation error for WorldStateDelta\nsonic.reverb\n  Input should be 'none', 'r"
+      ]
+    },
+    "karl_classroom_sensory": {
+      "compliance_rate": 0.0,
+      "evidence_consistency": 1.0,
+      "emotion_consistency": 1.0,
+      "n_runs": 1,
+      "n_valid": 0,
+      "errors": [
+        "run 0: API/JSON failure"
+      ]
+    },
+    "karl_hallway_social": {
+      "compliance_rate": 0.0,
+      "evidence_consistency": 1.0,
+      "emotion_consistency": 1.0,
+      "n_runs": 1,
+      "n_valid": 0,
+      "errors": [
+        "run 0: API/JSON failure"
+      ]
+    },
+    "karl_panic_internal": {
+      "compliance_rate": 0.0,
+      "evidence_consistency": 1.0,
+      "emotion_consistency": 1.0,
+      "n_runs": 1,
+      "n_valid": 0,
+      "errors": [
+        "run 0: API/JSON failure"
+      ]
+    }
+  },
+  "summary": {
+    "total": 12,
+    "passed": 2,
+    "pass_rate": "2/12"
+  }
+}

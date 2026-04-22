@@ -1,0 +1,114 @@
+{
+  "timestamp": "20260422-135323",
+  "provider": "glm",
+  "model": "glm-4.5-air",
+  "segments": {
+    "aladdin_cave_sparse": {
+      "compliance_rate": 1.0,
+      "evidence_consistency": 0.838095238095238,
+      "emotion_consistency": 1.0,
+      "n_runs": 5,
+      "n_valid": 5,
+      "errors": []
+    },
+    "aladdin_lamp_sparse": {
+      "compliance_rate": 1.0,
+      "evidence_consistency": 0.8666666666666667,
+      "emotion_consistency": 0.7,
+      "n_runs": 5,
+      "n_valid": 5,
+      "errors": []
+    },
+    "usher_approach_rich": {
+      "compliance_rate": 0.8,
+      "evidence_consistency": 1.0,
+      "emotion_consistency": 0.5,
+      "n_runs": 5,
+      "n_valid": 4,
+      "errors": [
+        "run 2: schema — 1 validation error for WorldStateDelta\nentity_updates.0.position\n  Input should "
+      ]
+    },
+    "masque_rooms_rich": {
+      "compliance_rate": 1.0,
+      "evidence_consistency": 1.0,
+      "emotion_consistency": 1.0,
+      "n_runs": 5,
+      "n_valid": 5,
+      "errors": []
+    },
+    "cask_unreliable_narrator": {
+      "compliance_rate": 1.0,
+      "evidence_consistency": 0.85,
+      "emotion_consistency": 0.8333333333333333,
+      "n_runs": 5,
+      "n_valid": 5,
+      "errors": []
+    },
+    "cthulhu_opening_philosophical": {
+      "compliance_rate": 1.0,
+      "evidence_consistency": 1.0,
+      "emotion_consistency": 1.0,
+      "n_runs": 5,
+      "n_valid": 5,
+      "errors": []
+    },
+    "ackroyd_breakfast_neutral": {
+      "compliance_rate": 0.8,
+      "evidence_consistency": 0.9375,
+      "emotion_consistency": 1.0,
+      "n_runs": 5,
+      "n_valid": 4,
+      "errors": [
+        "run 2: schema — 2 validation errors for WorldStateDelta\nentity_updates.0.position\n  Input should"
+      ]
+    },
+    "sakakibara_classroom_rich": {
+      "compliance_rate": 1.0,
+      "evidence_consistency": 1.0,
+      "emotion_consistency": 1.0,
+      "n_runs": 5,
+      "n_valid": 5,
+      "errors": []
+    },
+    "sakakibara_classroom_sparse": {
+      "compliance_rate": 1.0,
+      "evidence_consistency": 1.0,
+      "emotion_consistency": 0.6,
+      "n_runs": 5,
+      "n_valid": 5,
+      "errors": []
+    },
+    "karl_classroom_sensory": {
+      "compliance_rate": 0.8,
+      "evidence_consistency": 0.9375,
+      "emotion_consistency": 1.0,
+      "n_runs": 5,
+      "n_valid": 4,
+      "errors": [
+        "run 4: schema — 3 validation errors for WorldStateDelta\nvisual.lights.0.intensity\n  Input should"
+      ]
+    },
+    "karl_hallway_social": {
+      "compliance_rate": 1.0,
+      "evidence_consistency": 0.9,
+      "emotion_consistency": 0.6,
+      "n_runs": 5,
+      "n_valid": 5,
+      "errors": []
+    },
+    "karl_panic_internal": {
+      "compliance_rate": 1.0,
+      "evidence_consistency": 0.875,
+      "emotion_consistency": 0.85,
+      "n_runs": 5,
+      "n_valid": 5,
+      "errors": []
+    }
+  },
+  "summary": {
+    "total": 12,
+    "passed": 4,
+    "pass_rate": "4/12"
+  }
+}

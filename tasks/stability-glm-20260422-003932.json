@@ -1,0 +1,121 @@
+{
+  "timestamp": "20260422-003932",
+  "provider": "glm",
+  "model": "glm-4.5-air",
+  "segments": {
+    "aladdin_cave_sparse": {
+      "compliance_rate": 0.8,
+      "evidence_consistency": 1.0,
+      "emotion_consistency": 1.0,
+      "n_runs": 5,
+      "n_valid": 4,
+      "errors": [
+        "run 3: schema — 1 validation error for WorldStateDelta\nnarrative.stage\n  Input should be a valid"
+      ]
+    },
+    "aladdin_lamp_sparse": {
+      "compliance_rate": 0.6,
+      "evidence_consistency": 1.0,
+      "emotion_consistency": 0.6666666666666666,
+      "n_runs": 5,
+      "n_valid": 3,
+      "errors": [
+        "run 0: schema — 2 validation errors for WorldStateDelta\nentity_updates.2.emotion.evidence.source",
+        "run 2: schema — 1 validation error for WorldStateDelta\nentity_updates.1.emotion.evidence.source\n"
+      ]
+    },
+    "usher_approach_rich": {
+      "compliance_rate": 1.0,
+      "evidence_consistency": 1.0,
+      "emotion_consistency": 1.0,
+      "n_runs": 5,
+      "n_valid": 5,
+      "errors": []
+    },
+    "masque_rooms_rich": {
+      "compliance_rate": 0.8,
+      "evidence_consistency": 1.0,
+      "emotion_consistency": 1.0,
+      "n_runs": 5,
+      "n_valid": 4,
+      "errors": [
+        "run 4: schema — 1 validation error for WorldStateDelta\nvisual.scene_type_evidence.level\n  Input "
+      ]
+    },
+    "cask_unreliable_narrator": {
+      "compliance_rate": 0.6,
+      "evidence_consistency": 0.7777777777777777,
+      "emotion_consistency": 0.6666666666666666,
+      "n_runs": 5,
+      "n_valid": 3,
+      "errors": [
+        "run 0: schema — 2 validation errors for WorldStateDelta\nentity_updates.1.emotion.evidence.source",
+        "run 2: schema — 2 validation errors for WorldStateDelta\nentity_updates.1.emotion.evidence.source"
+      ]
+    },
+    "cthulhu_opening_philosophical": {
+      "compliance_rate": 1.0,
+      "evidence_consistency": 1.0,
+      "emotion_consistency": 1.0,
+      "n_runs": 5,
+      "n_valid": 5,
+      "errors": []
+    },
+    "ackroyd_breakfast_neutral": {
+      "compliance_rate": 1.0,
+      "evidence_consistency": 0.65,
+      "emotion_consistency": 0.5,
+      "n_runs": 5,
+      "n_valid": 5,
+      "errors": []
+    },
+    "sakakibara_classroom_rich": {
+      "compliance_rate": 1.0,
+      "evidence_consistency": 1.0,
+      "emotion_consistency": 1.0,
+      "n_runs": 5,
+      "n_valid": 5,
+      "errors": []
+    },
+    "sakakibara_classroom_sparse": {
+      "compliance_rate": 0.6,
+      "evidence_consistency": 1.0,
+      "emotion_consistency": 1.0,
+      "n_runs": 5,
+      "n_valid": 3,
+      "errors": [
+        "run 0: schema — 2 validation errors for WorldStateDelta\nentity_updates.0.emotion.evidence.source",
+        "run 4: API/JSON failure"
+      ]
+    },
+    "karl_classroom_sensory": {
+      "compliance_rate": 1.0,
+      "evidence_consistency": 0.9199999999999999,
+      "emotion_consistency": 1.0,
+      "n_runs": 5,
+      "n_valid": 5,
+      "errors": []
+    },
+    "karl_hallway_social": {
+      "compliance_rate": 1.0,
+      "evidence_consistency": 1.0,
+      "emotion_consistency": 0.4,
+      "n_runs": 5,
+      "n_valid": 5,
+      "errors": []
+    },
+    "karl_panic_internal": {
+      "compliance_rate": 1.0,
+      "evidence_consistency": 0.85,
+      "emotion_consistency": 0.35,
+      "n_runs": 5,
+      "n_valid": 5,
+      "errors": []
+    }
+  },
+  "summary": {
+    "total": 12,
+    "passed": 4,
+    "pass_rate": "4/12"
+  }
+}
