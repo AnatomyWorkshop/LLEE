@@ -1,0 +1,128 @@
+{
+  "timestamp": "20260422-154024",
+  "provider": "glm",
+  "model": "glm-4.5-air",
+  "condition": "C",
+  "segments": {
+    "aladdin_cave_sparse": {
+      "condition": "C",
+      "schema_valid": false,
+      "fill_rate": 1.0,
+      "env_fill_rate": 0.0,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entity_updates': {'Aladdin': {'location': 'beautiful gardens outside city gates', 'action': 'journeying with magician'}, 'magician': {'location': 'beautiful gardens outside city gates', 'action': 'leading Aladdin, sharing cake'}, 'cake': {'location': \"magician's girdle, then divided between magici"
+    },
+    "aladdin_lamp_sparse": {
+      "condition": "C",
+      "schema_valid": false,
+      "fill_rate": 1.0,
+      "env_fill_rate": 0.0,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entity_updates': {'Aladdin': {'location': 'dark place', 'emotional_state': 'sad/crying/lamenting', 'actions': ['clasped hands in prayer', 'rubbed the ring']}, 'magician': {'actions': ['forgot to take the ring from Aladdin']}, 'genie': {'appearance': 'enormous and frightful', 'origin': 'rose out of"
+    },
+    "usher_approach_rich": {
+      "condition": "C",
+      "schema_valid": false,
+      "fill_rate": 1.0,
+      "env_fill_rate": 0.0,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entity_updates': {'narrator': {'location': 'approaching the House of Usher', 'mode_of_transportation': 'horseback', 'company': 'alone', 'emotional_state': 'gloomy, melancholy'}, 'environment': {'time_of_day': 'evening', 'season': 'autumn', 'weather': 'dull, dark, soundless', 'sky': 'clouds hanging"
+    },
+    "masque_rooms_rich": {
+      "condition": "C",
+      "schema_valid": false,
+      "fill_rate": 1.0,
+      "env_fill_rate": 0.0,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entity_updates': {'apartments': {'count': 7, 'layout': 'irregular', 'visibility': 'limited to one at a time', 'turn_frequency': 'every 20-30 yards', 'turn_effect': 'novel effect at each turn', 'details': [{'number': 1, 'position': 'eastern extremity', 'color': 'blue', 'windows': 'vividly blue'}, {"
+    },
+    "cask_unreliable_narrator": {
+      "condition": "C",
+      "schema_valid": false,
+      "fill_rate": 1.0,
+      "env_fill_rate": 0.0,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entity_updates': {'friend': {'appearance': {'costume': {'type': 'motley', 'description': 'tight-fitting parti-striped dress', 'headwear': 'conical cap and bells'}}, 'state': {'intoxication': 'drinking much'}}, 'narrator': {'emotional_state': 'pleased'}}, 'visual': {'time_of_day': 'dusk', 'season':"
+    },
+    "cthulhu_opening_philosophical": {
+      "condition": "C",
+      "schema_valid": false,
+      "fill_rate": 1.0,
+      "env_fill_rate": 0.0,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entity_updates': {'characters': {}, 'objects': {}, 'locations': {}, 'concepts': {}}, 'visual': {'environment': {'placid island of ignorance': {'value': True, 'evidence': 'explicit'}, 'black seas of infinity': {'value': True, 'evidence': 'explicit'}, 'terrifying vistas of reality': {'value': True, "
+    },
+    "ackroyd_breakfast_neutral": {
+      "condition": "C",
+      "schema_valid": false,
+      "fill_rate": 1.0,
+      "env_fill_rate": 0.0,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entity_updates': {'narrator': {'name': 'James', 'location': 'unknown (but to the right of the dining room)', 'thoughts': {'about_caroline': {'question_was_unnecessary': True}}}, 'caroline': {'name': 'Caroline', 'relation_to_narrator': 'sister', 'location': 'dining room', 'actions': {'making_tea': "
+    },
+    "sakakibara_classroom_rich": {
+      "condition": "C",
+      "schema_valid": false,
+      "fill_rate": 1.0,
+      "env_fill_rate": 0.0,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entity_updates': {'classroom': {'type': 'location', 'evidence': 'explicit', 'value': 'present'}, 'students': {'type': 'people', 'evidence': 'explicit', 'value': 34}, 'desks': {'type': 'furniture', 'evidence': 'explicit', 'value': 'multiple rows arranged in grid'}, 'rain': {'type': 'weather', 'evid"
+    },
+    "sakakibara_classroom_sparse": {
+      "condition": "C",
+      "schema_valid": false,
+      "fill_rate": 1.0,
+      "env_fill_rate": 0.0,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entity_updates': {'Sakakibara Kaito': {'name': 'Sakakibara Kaito', 'activity': 'staring at kanji', 'duration': '11 minutes', 'mental_state': 'distracted/contemplative', 'evidence': 'explicit'}}, 'visual': {'weather': 'rain', 'season': 'April', 'environment': 'outdoors', 'details': 'cherry blossom "
+    },
+    "karl_classroom_sensory": {
+      "condition": "C",
+      "schema_valid": false,
+      "fill_rate": 1.0,
+      "env_fill_rate": 0.0,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entity_updates': {'character': {'position': 'pushing up', 'state': 'feeling heavy', 'evidence': 'explicit'}, 'chair': {'action': 'scraping against floor', 'evidence': 'explicit'}, 'jeans': {'material': 'worn denim', 'action': 'rustling', 'evidence': 'explicit'}, 'window': {'surface': 'cool, smooth"
+    },
+    "karl_hallway_social": {
+      "condition": "C",
+      "schema_valid": false,
+      "fill_rate": 1.0,
+      "env_fill_rate": 0.0,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entity_updates': {'clothing': {'Champion hoodies': {'has_evidence': True}, 'Lululemon leggings': {'has_evidence': True}, 'Fjällräven Kånken backpacks': {'has_evidence': True}}, 'objects': {\"dad's roses\": {'has_evidence': True}}, 'protagonist': {'social_status': {'unknown': {'has_evidence': True}, "
+    },
+    "karl_panic_internal": {
+      "condition": "C",
+      "schema_valid": false,
+      "fill_rate": 1.0,
+      "env_fill_rate": 0.0,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entity_updates': {'narrator': {'state': 'blank_mind', 'evidence': 'explicit'}, 'father': {'emotion': 'finality', 'action': 'cutting_off', 'evidence': 'behavioral'}, 'dna_report': {'location': 'kitchen_table', 'condition': 'crinkled_edge', 'evidence': 'visual'}}, 'visual': {'void': {'description': "
+    }
+  }
+}

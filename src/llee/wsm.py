@@ -69,6 +69,8 @@ class WorldStateMachine:
                 self.state.visual.scene_type = delta.visual.scene_type
             if delta.visual.scene_type_evidence is not None:
                 self.state.visual.scene_type_evidence = delta.visual.scene_type_evidence
+            if delta.visual.scene_features is not None:
+                self.state.visual.scene_features = delta.visual.scene_features
 
         if delta.sonic:
             if delta.sonic.reverb is not None:

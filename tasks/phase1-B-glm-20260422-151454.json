@@ -1,0 +1,128 @@
+{
+  "timestamp": "20260422-151454",
+  "provider": "glm",
+  "model": "glm-4.5-air",
+  "condition": "B",
+  "segments": {
+    "aladdin_cave_sparse": {
+      "condition": "B",
+      "schema_valid": true,
+      "fill_rate": 0.0,
+      "env_fill_rate": 0.0,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entities': [{'id': 'magician', 'emotion': 'calm', 'action': 'leading'}, {'id': 'Aladdin', 'emotion': 'neutral', 'action': 'following'}], 'scene_type': 'outdoor', 'lighting': 'natural daylight', 'sounds': ['water flowing', 'footsteps'], 'atmosphere': 'peaceful and serene', 'tension': 0.2}"
+    },
+    "aladdin_lamp_sparse": {
+      "condition": "B",
+      "schema_valid": true,
+      "fill_rate": 0.0,
+      "env_fill_rate": 0.0,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entities': [{'id': 'Aladdin', 'emotion': 'despair', 'action': 'rubbed the ring'}, {'id': 'Genie', 'emotion': 'frightful', 'action': 'rose from earth'}], 'scene_type': 'magical', 'lighting': 'dark', 'sounds': ['crying', 'lamenting', 'earth movement'], 'atmosphere': 'somber and mysterious with super"
+    },
+    "usher_approach_rich": {
+      "condition": "B",
+      "schema_valid": true,
+      "fill_rate": 0.0,
+      "env_fill_rate": 0.0,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entities': [{'id': 'narrator', 'emotion': 'gloomy', 'action': 'riding'}, {'id': 'House of Usher', 'emotion': 'melancholy', 'action': 'standing'}], 'scene_type': 'gothic', 'lighting': 'dull, dark, oppressive', 'sounds': ['soundless'], 'atmosphere': 'oppressive, melancholic, dreary', 'tension': 0.7}"
+    },
+    "masque_rooms_rich": {
+      "condition": "B",
+      "schema_valid": true,
+      "fill_rate": 0.0,
+      "env_fill_rate": 0.0,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entities': [], 'scene_type': 'series of colored apartments/chambers', 'lighting': 'each chamber illuminated with corresponding colored light (blue chamber with blue windows, purple with purple panes, etc.), final chamber completely dark with black velvet tapestries', 'sounds': [], 'atmosphere': 'm"
+    },
+    "cask_unreliable_narrator": {
+      "condition": "B",
+      "schema_valid": true,
+      "fill_rate": 0.0,
+      "env_fill_rate": 0.0,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entities': [{'id': 'friend', 'emotion': 'excessive warmth', 'action': 'accosted'}, {'id': 'narrator', 'emotion': 'pleased', 'action': 'wringing hand'}], 'scene_type': 'carnival street', 'lighting': 'dusk', 'sounds': ['jingling bells', 'carnival noises'], 'atmosphere': 'festive yet chaotic carnival"
+    },
+    "cthulhu_opening_philosophical": {
+      "condition": "B",
+      "schema_valid": true,
+      "fill_rate": 0.0,
+      "env_fill_rate": 0.0,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entities': [], 'scene_type': 'philosophical', 'lighting': 'dark with threatening illumination', 'sounds': [], 'atmosphere': 'existential dread and cosmic horror', 'tension': 0.8}"
+    },
+    "ackroyd_breakfast_neutral": {
+      "condition": "B",
+      "schema_valid": true,
+      "fill_rate": 0.0,
+      "env_fill_rate": 0.0,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entities': [{'id': 'James', 'emotion': 'resigned', 'action': 'entering'}, {'id': 'Caroline', 'emotion': 'neutral', 'action': 'calling out'}], 'scene_type': 'domestic indoor', 'lighting': 'well-lit', 'sounds': ['rattle of tea-cups', 'short dry cough', 'voice calling'], 'atmosphere': 'formal with dr"
+    },
+    "sakakibara_classroom_rich": {
+      "condition": "B",
+      "schema_valid": true,
+      "fill_rate": 0.0,
+      "env_fill_rate": 0.0,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entities': [{'id': 'students', 'emotion': 'anticipatory', 'action': 'present'}, {'id': 'rain', 'emotion': 'impatient', 'action': 'tapping'}], 'scene_type': 'classroom', 'lighting': 'not specified', 'sounds': ['rain tapping against windowpanes'], 'atmosphere': 'tense and anticipatory with sensory d"
+    },
+    "sakakibara_classroom_sparse": {
+      "condition": "B",
+      "schema_valid": true,
+      "fill_rate": 0.0,
+      "env_fill_rate": 0.0,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entities': [{'id': 'Sakakibara Kaito', 'emotion': 'contemplative', 'action': 'staring'}], 'scene_type': 'study', 'lighting': 'daylight', 'sounds': ['rain falling'], 'atmosphere': 'contemplative and quiet', 'tension': 0.0}"
+    },
+    "karl_classroom_sensory": {
+      "condition": "B",
+      "schema_valid": true,
+      "fill_rate": 0.0,
+      "env_fill_rate": 0.0,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entities': [{'id': 'you', 'emotion': 'contemplative', 'action': 'standing'}], 'scene_type': 'indoor', 'lighting': 'pale golden morning light', 'sounds': ['scraping chair', 'rustling denim'], 'atmosphere': 'quiet and contemplative with a sense of stillness', 'tension': 0.2}"
+    },
+    "karl_hallway_social": {
+      "condition": "B",
+      "schema_valid": true,
+      "fill_rate": 0.0,
+      "env_fill_rate": 0.0,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entities': [{'id': 'You', 'emotion': 'self-aware', 'action': 'step'}], 'scene_type': 'crowded hallway', 'lighting': 'not specified', 'sounds': [], 'atmosphere': 'chaotic yet personally meaningful', 'tension': 0.1}"
+    },
+    "karl_panic_internal": {
+      "condition": "B",
+      "schema_valid": true,
+      "fill_rate": 0.0,
+      "env_fill_rate": 0.0,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entities': [{'id': 'narrator', 'emotion': 'confused', 'action': 'recalling'}, {'id': 'father', 'emotion': 'final', 'action': 'cutting_off'}], 'scene_type': 'mental', 'lighting': 'vast, white, static-filled', 'sounds': ['static'], 'atmosphere': 'tense, confused, emotionally charged', 'tension': 0.8"
+    }
+  }
+}

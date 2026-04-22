@@ -163,6 +163,7 @@ class VisualField(BaseModel):
     atmosphere: VisualAtmosphere = Field(default_factory=VisualAtmosphere)
     scene_type: Optional[str] = None
     scene_type_evidence: Evidence = Field(default_factory=Evidence)
+    scene_features: list[str] = Field(default_factory=list)
 
 
 # ─── S: Sonic Field Group ──────────────────────────────────────────────────────
@@ -248,6 +249,7 @@ class VisualDelta(BaseModel):
     atmosphere: Optional[VisualAtmosphere] = None
     scene_type: Optional[str] = None
     scene_type_evidence: Optional[Evidence] = None
+    scene_features: Optional[list[str]] = None
 
 
 class SonicDelta(BaseModel):

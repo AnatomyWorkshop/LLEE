@@ -1,0 +1,195 @@
+{
+  "timestamp": "20260422-152634",
+  "provider": "glm",
+  "model": "glm-4.5-air",
+  "condition": "D",
+  "segments": {
+    "aladdin_cave_sparse": {
+      "condition": "D",
+      "schema_valid": true,
+      "fill_rate": 0.375,
+      "env_fill_rate": 0.286,
+      "iei_leak": false,
+      "evidence_levels": [
+        "undefined",
+        "behavioral",
+        "behavioral",
+        "behavioral",
+        "behavioral",
+        "undefined",
+        "behavioral",
+        "behavioral"
+      ],
+      "emotion_labels": [
+        "neutral",
+        "neutral"
+      ],
+      "output_preview": "{'entity_updates': [{'id': 'magician', 'action': {'verb': 'led', 'target': 'Aladdin', 'evidence': {'level': 'behavioral', 'source': 'text', 'confidence': 0.8, 'source_span': (9, 22)}}, 'emotion': {'value': 'neutral', 'evidence': {'level': 'undefined', 'source': 'text', 'confidence': 0.0, 'source_spa"
+    },
+    "aladdin_lamp_sparse": {
+      "condition": "D",
+      "schema_valid": true,
+      "fill_rate": 0.457,
+      "env_fill_rate": 0.286,
+      "iei_leak": false,
+      "evidence_levels": [
+        "behavioral",
+        "behavioral",
+        "behavioral",
+        "behavioral",
+        "undefined",
+        "behavioral",
+        "behavioral"
+      ],
+      "emotion_labels": [
+        "sadness",
+        "neutral"
+      ],
+      "output_preview": "{'entity_updates': [{'id': 'aladdin', 'emotion': {'value': 'sadness', 'evidence': {'level': 'behavioral', 'source': 'text', 'confidence': 0.75, 'source_span': (32, 48)}}, 'action': {'verb': 'cried', 'target': None, 'evidence': {'level': 'behavioral', 'source': 'text', 'confidence': 0.75, 'source_spa"
+    },
+    "usher_approach_rich": {
+      "condition": "D",
+      "schema_valid": false,
+      "fill_rate": 0.65,
+      "env_fill_rate": 0.429,
+      "iei_leak": false,
+      "evidence_levels": [
+        "explicit",
+        "behavioral",
+        "undefined"
+      ],
+      "emotion_labels": [
+        "sadness",
+        "neutral"
+      ],
+      "output_preview": "{'entity_updates': [{'id': 'narrator', 'emotion': {'value': 'sadness', 'evidence': {'level': 'explicit', 'source': 'text', 'confidence': 0.9, 'source_span': (248, 283)}}, 'action': {'verb': 'passing', 'target': None, 'evidence': {'level': 'behavioral', 'source': 'text', 'confidence': 0.8, 'source_sp"
+    },
+    "masque_rooms_rich": {
+      "condition": "D",
+      "schema_valid": true,
+      "fill_rate": 0.8,
+      "env_fill_rate": 0.571,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entity_updates': [], 'entity_removals': [], 'visual': {'lights': [{'color': 'blue', 'source': 'windows', 'position': 'eastern extremity', 'id': 'light_0'}, {'color': 'purple', 'source': 'panes', 'position': 'second chamber', 'id': 'light_0'}, {'color': 'green', 'source': 'casements', 'position': '"
+    },
+    "cask_unreliable_narrator": {
+      "condition": "D",
+      "schema_valid": true,
+      "fill_rate": 0.55,
+      "env_fill_rate": 0.286,
+      "iei_leak": false,
+      "evidence_levels": [
+        "explicit",
+        "behavioral",
+        "undefined",
+        "behavioral"
+      ],
+      "emotion_labels": [
+        "joy",
+        "undefined"
+      ],
+      "output_preview": "{'entity_updates': [{'id': 'narrator', 'emotion': {'value': 'joy', 'evidence': {'level': 'explicit', 'source': 'text', 'confidence': 0.9, 'source_span': (147, 160)}}, 'action': {'verb': 'wringing', 'target': 'friend', 'evidence': {'level': 'behavioral', 'source': 'text', 'confidence': 0.8, 'source_s"
+    },
+    "cthulhu_opening_philosophical": {
+      "condition": "D",
+      "schema_valid": true,
+      "fill_rate": 0.467,
+      "env_fill_rate": 0.143,
+      "iei_leak": false,
+      "evidence_levels": [
+        "undefined"
+      ],
+      "emotion_labels": [
+        "neutral"
+      ],
+      "output_preview": "{'entity_updates': [{'id': 'humanity', 'emotion': {'value': 'neutral', 'evidence': {'level': 'undefined', 'source': 'text', 'confidence': 0.0, 'source_span': (0, 0)}}}], 'entity_removals': [], 'visual': {'lights': [], 'atmosphere': None, 'scene_type': 'abstract', 'scene_type_evidence': {'level': 'ex"
+    },
+    "ackroyd_breakfast_neutral": {
+      "condition": "D",
+      "schema_valid": true,
+      "fill_rate": 0.55,
+      "env_fill_rate": 0.286,
+      "iei_leak": false,
+      "evidence_levels": [
+        "undefined",
+        "behavioral",
+        "undefined",
+        "behavioral"
+      ],
+      "emotion_labels": [
+        "neutral",
+        "neutral"
+      ],
+      "output_preview": "{'entity_updates': [{'id': 'james', 'emotion': {'value': 'neutral', 'evidence': {'level': 'undefined', 'source': 'text', 'confidence': 0.0, 'source_span': (0, 0)}}, 'action': {'verb': 'thinking', 'target': \"caroline's question\", 'evidence': {'level': 'behavioral', 'source': 'text', 'confidence': 0.7"
+    },
+    "sakakibara_classroom_rich": {
+      "condition": "D",
+      "schema_valid": true,
+      "fill_rate": 0.778,
+      "env_fill_rate": 0.571,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entity_updates': [], 'entity_removals': [], 'visual': {'lights': [], 'atmosphere': {'fog_density': 0.0}, 'scene_type': 'interior'}, 'sonic': {'reverb': 'room_small', 'ambient_sounds': [{'id': 'rain_tapping', 'sound_type': 'rain_tapping', 'intensity': 0.5}], 'music_tension': None}, 'narrative': {'t"
+    },
+    "sakakibara_classroom_sparse": {
+      "condition": "D",
+      "fill_rate": null,
+      "env_fill_rate": null,
+      "iei_leak": null,
+      "schema_valid": false,
+      "output_preview": "{'error': 'JSON parse failure', 'raw_preview': '{\\n  \"entity_updates\": [\\n    {\\n      \"id\": \"Sakakibara_Kaito\",\\n      \"emotion\": {\\n        \"value\": \"undefined\",\\n        \"evidence\": {\\n          \"level\": \"undefined\",\\n          \"source\": \"text\",\\n       '}"
+    },
+    "karl_classroom_sensory": {
+      "condition": "D",
+      "schema_valid": true,
+      "fill_rate": 0.467,
+      "env_fill_rate": 0.571,
+      "iei_leak": false,
+      "evidence_levels": [
+        "undefined",
+        "behavioral",
+        "behavioral",
+        "behavioral"
+      ],
+      "emotion_labels": [
+        "neutral"
+      ],
+      "output_preview": "{'entity_updates': [{'id': 'character', 'emotion': {'value': 'neutral', 'evidence': {'level': 'undefined', 'source': 'text', 'confidence': 0.0, 'source_span': (0, 0)}}, 'action': {'verb': 'scrape', 'target': 'linoleum_floor', 'evidence': {'level': 'behavioral', 'source': 'text', 'confidence': 0.8, '"
+    },
+    "karl_hallway_social": {
+      "condition": "D",
+      "schema_valid": true,
+      "fill_rate": 0.667,
+      "env_fill_rate": 0.286,
+      "iei_leak": false,
+      "evidence_levels": [
+        "undefined",
+        "behavioral"
+      ],
+      "emotion_labels": [
+        "neutral"
+      ],
+      "output_preview": "{'entity_updates': [{'id': 'you', 'emotion': {'value': 'neutral', 'evidence': {'level': 'undefined', 'source': 'text', 'confidence': 0.0, 'source_span': (0, 0)}}, 'action': {'verb': 'step', 'target': 'the current', 'evidence': {'level': 'behavioral', 'source': 'text', 'confidence': 0.8, 'source_span"
+    },
+    "karl_panic_internal": {
+      "condition": "D",
+      "schema_valid": true,
+      "fill_rate": 0.55,
+      "env_fill_rate": 0.286,
+      "iei_leak": false,
+      "evidence_levels": [
+        "behavioral",
+        "behavioral",
+        "behavioral"
+      ],
+      "emotion_labels": [
+        "confusion",
+        "anxiety"
+      ],
+      "output_preview": "{'entity_updates': [{'id': 'narrator', 'emotion': {'value': 'confusion', 'evidence': {'level': 'behavioral', 'source': 'text', 'confidence': 0.75, 'source_span': (0, 18)}}, 'action': None, 'position': None, 'state': None}, {'id': 'father', 'emotion': {'value': 'anxiety', 'evidence': {'level': 'behav"
+    }
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "timestamp": "20260422-150438",
+  "provider": "glm",
+  "model": "glm-4.5-air",
+  "condition": "A",
+  "segments": {
+    "aladdin_cave_sparse": {
+      "condition": "A",
+      "fill_rate": null,
+      "env_fill_rate": null,
+      "iei_leak": null,
+      "schema_valid": null,
+      "output_preview": "{'raw_text': \"The scene opens with the magician leading Aladdin through beautiful gardens located far beyond the city gates. The magician appears in control of the situation, while Aladdin follows, though his emotional state remains ambiguous. They find a peaceful spot by a fountain, where the magic"
+    },
+    "aladdin_lamp_sparse": {
+      "condition": "A",
+      "fill_rate": null,
+      "env_fill_rate": null,
+      "iei_leak": null,
+      "schema_valid": null,
+      "output_preview": "{'raw_text': 'The scene depicts Aladdin in a state of profound despair, confined in darkness for two days while crying and lamenting. His emotional state is one of desperation and sorrow, having been abandoned by the magician who took the lamp but forgot the ring. In his moment of deepest hopelessne"
+    },
+    "usher_approach_rich": {
+      "condition": "A",
+      "fill_rate": null,
+      "env_fill_rate": null,
+      "iei_leak": null,
+      "schema_valid": null,
+      "output_preview": "{'raw_text': 'The scene opens with a solitary figure, the narrator, traveling alone on horseback through a bleak autumn landscape. The rider appears somber and contemplative, having spent hours traversing a particularly desolate region. As evening approaches, the rider\\'s mood shifts to one of growi"
+    },
+    "masque_rooms_rich": {
+      "condition": "A",
+      "fill_rate": null,
+      "env_fill_rate": null,
+      "iei_leak": null,
+      "schema_valid": null,
+      "output_preview": "{'raw_text': \"The passage describes a series of uniquely decorated apartments arranged in an irregular pattern with sharp turns occurring every twenty to thirty yards. An observer is moving through these spaces, encountering one chamber at a time as they navigate the twisting layout. The observer ap"
+    },
+    "cask_unreliable_narrator": {
+      "condition": "A",
+      "fill_rate": null,
+      "env_fill_rate": null,
+      "iei_leak": null,
+      "schema_valid": null,
+      "output_preview": "{'raw_text': 'The scene takes place at dusk during the carnival season, a time described as \"supreme madness,\" suggesting a chaotic, festive atmosphere. Two characters are present: the narrator and his friend. The friend appears intoxicated, evidenced by his \"excessive warmth\" and the fact that \"he "
+    },
+    "cthulhu_opening_philosophical": {
+      "condition": "A",
+      "fill_rate": null,
+      "env_fill_rate": null,
+      "iei_leak": null,
+      "schema_valid": null,
+      "output_preview": "{'raw_text': 'This passage presents a philosophical meditation rather than a physical scene, but it creates a powerful atmospheric vision of human existence in the cosmos. The narrator speaks from a perspective of existential dread, contemplating humanity\\'s precarious position between limited knowl"
+    },
+    "ackroyd_breakfast_neutral": {
+      "condition": "A",
+      "fill_rate": null,
+      "env_fill_rate": null,
+      "iei_leak": null,
+      "schema_valid": null,
+      "output_preview": "{'raw_text': 'The scene takes place in what appears to be a home entryway or hallway adjacent to a dining room. The narrator, James, has just entered the house, while his sister Caroline is seated in the dining room. Caroline is having tea, as evidenced by the rattle of tea-cups, and her \"short, dry"
+    },
+    "sakakibara_classroom_rich": {
+      "condition": "A",
+      "fill_rate": null,
+      "env_fill_rate": null,
+      "iei_leak": null,
+      "schema_valid": null,
+      "output_preview": "{'raw_text': 'The scene takes place in a Japanese classroom where thirty-four students are present, though not individually described. Their collective emotional state is one of anticipation and tension, as suggested by the personification of the classroom \"holding its breath.\" The students are wear"
+    },
+    "sakakibara_classroom_sparse": {
+      "condition": "A",
+      "fill_rate": null,
+      "env_fill_rate": null,
+      "iei_leak": null,
+      "schema_valid": null,
+      "output_preview": "{'raw_text': 'The scene unfolds in a quiet, rain-soaked April setting where cherry blossom petals cling to the wet pavement like colorful confetti, creating a delicate contrast against the gray surroundings. Sakakibara Kaito is the sole figure present, his face illuminated by the soft, diffused ligh"
+    },
+    "karl_classroom_sensory": {
+      "condition": "A",
+      "fill_rate": null,
+      "env_fill_rate": null,
+      "iei_leak": null,
+      "schema_valid": null,
+      "output_preview": "{'raw_text': \"The scene depicts a solitary figure in a school room, rising from a chair near a window. The narrator appears weary, their body feeling unusually heavy as they push themselves up, suggesting fatigue or emotional burden. The worn denim of their jeans rustles softly against the linoleum "
+    },
+    "karl_hallway_social": {
+      "condition": "A",
+      "fill_rate": null,
+      "env_fill_rate": null,
+      "iei_leak": null,
+      "schema_valid": null,
+      "output_preview": "{'raw_text': 'The hallway is filled with a dense, moving crowd of students, all dressed in contemporary athletic wear—Champion hoodies, Lululemon leggings, and distinctive Fjällräven Kånken backpacks create a visual tapestry of youthful anonymity. The narrator feels both submerged within this river "
+    },
+    "karl_panic_internal": {
+      "condition": "A",
+      "fill_rate": null,
+      "env_fill_rate": null,
+      "iei_leak": null,
+      "schema_valid": null,
+      "output_preview": "{'raw_text': 'The scene unfolds within the narrator\\'s mind as a disorienting void—vast, white, and filled with static—where a simple \"fun fact\" should reside. This emptiness reflects a profound mental block, suggesting trauma or shock. The narrator appears confused and distressed, struggling to rec"
+    }
+  }
+}

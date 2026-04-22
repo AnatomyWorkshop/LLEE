@@ -263,6 +263,8 @@ def validate_delta(raw: dict) -> tuple[bool, str]:
 def extract_evidence_levels(delta: dict) -> list[str]:
     levels = []
     for eu in delta.get("entity_updates", []):
+        if not isinstance(eu, dict):
+            continue
         em = eu.get("emotion") or {}
         ev = em.get("evidence") or {}
         if lv := ev.get("level"):
@@ -278,7 +280,7 @@ def extract_emotion_labels(delta: dict) -> list[str]:
     return [
         (eu.get("emotion") or {}).get("value", "")
         for eu in delta.get("entity_updates", [])
-        if eu.get("emotion")
+        if isinstance(eu, dict) and eu.get("emotion")
     ]
 
 
