@@ -1,0 +1,64 @@
+{
+  "phase1-F-deepseek-chat-20260423-163346.json": {
+    "source_file": "D:\\LLEE\\tasks\\phase1-F-deepseek-chat-20260423-163346.json",
+    "model": "deepseek-chat",
+    "n_segments": 12,
+    "variants": {
+      "baseline": {
+        "atm_rate": 0.7,
+        "ctx_rate": 0.9,
+        "atm_avg_persist_turns": 0,
+        "ctx_avg_persist_turns": 0,
+        "atm_persist_events": 0,
+        "ctx_persist_events": 0
+      },
+      "+20%": {
+        "atm_rate": 0.84,
+        "ctx_rate": 1.0,
+        "atm_avg_persist_turns": 0,
+        "ctx_avg_persist_turns": 0,
+        "atm_persist_events": 0,
+        "ctx_persist_events": 0
+      },
+      "-20%": {
+        "atm_rate": 0.56,
+        "ctx_rate": 0.72,
+        "atm_avg_persist_turns": 0,
+        "ctx_avg_persist_turns": 0,
+        "atm_persist_events": 0,
+        "ctx_persist_events": 0
+      }
+    }
+  },
+  "phase1-F-glm-20260422-151207.json": {
+    "source_file": "D:\\LLEE\\tasks\\phase1-F-glm-20260422-151207.json",
+    "model": "glm-4.5-air",
+    "n_segments": 12,
+    "variants": {
+      "baseline": {
+        "atm_rate": 0.7,
+        "ctx_rate": 0.9,
+        "atm_avg_persist_turns": 0,
+        "ctx_avg_persist_turns": 0,
+        "atm_persist_events": 0,
+        "ctx_persist_events": 0
+      },
+      "+20%": {
+        "atm_rate": 0.84,
+        "ctx_rate": 1.0,
+        "atm_avg_persist_turns": 0,
+        "ctx_avg_persist_turns": 0,
+        "atm_persist_events": 0,
+        "ctx_persist_events": 0
+      },
+      "-20%": {
+        "atm_rate": 0.56,
+        "ctx_rate": 0.72,
+        "atm_avg_persist_turns": 0,
+        "ctx_avg_persist_turns": 0,
+        "atm_persist_events": 0,
+        "ctx_persist_events": 0
+      }
+    }
+  }
+}

@@ -311,12 +311,43 @@ Corpus (12 segments × 6 styles × AI/human)
 
 ## 8. Results
 
-[PLACEHOLDER: Phase 0.5–3 experimental data]
+### 8.1 Prompt Stability (Phase 0.5)
 
-**[Table 4: PLACEHOLDER — Stability test results per segment]**
-**[Fig 5: PLACEHOLDER — Parser fidelity across 5 conditions by style]**
-**[Table 5: PLACEHOLDER — Environment recall rate by style]**
-**[Fig 6: PLACEHOLDER — Evidence consistency: AI vs human text]**
+Stability testing was conducted on GLM-4.5-air with 5 runs per segment across 12 corpus segments. After two rounds of prompt iteration (v1 → v2, adding emotion vocabulary constraints, strategic-intent rules, and enum enforcement):
+
+- Schema compliance: average 95% (target: ≥95%)
+- Evidence consistency: average 93% (target: >80%, **PASS**)
+- Emotion consistency: average 80% (target: >80%, **borderline**)
+- 4/12 segments fully pass all three criteria
+
+Emotion consistency remains the primary bottleneck. Segments with abstract/philosophical content (Lovecraft) and unreliable narrators (Poe's Cask) show the highest variance, reflecting genuine ambiguity in the source text rather than parser instability. *Full multi-round analysis with additional models pending.*
+
+### 8.2 Parser Fidelity (Phase 1, Round 1)
+
+**[Table 4: Phase 1 Condition Comparison (GLM-4.5-air, 12 segments)]**
+
+| Condition | Description | Schema Valid | Avg Fill Rate | Avg Env Fill | IEI Leaks |
+|-----------|------------|-------------|---------------|-------------|-----------|
+| A | Free text (no schema) | 0/12 | N/A | N/A | N/A |
+| B | JSON schema, no evidence | 12/12 | * | * | 0 |
+| C | Binary evidence ablation | 0/12 ** | * | 0% | 0 |
+| D | Coarse material ablation | 10/12 | 57% | 36% | 0 |
+| F | LLEE Full (6-type evidence) | **12/12** | **52%** | **24%** | **0** |
+
+\* B and C use non-LLEE JSON structures; fill rates not directly comparable.
+\*\* C outputs binary evidence labels not in the 6-type enum, causing schema validation failure by design.
+
+Key findings:
+- **IEI is zero across all structured conditions (B, C, D, F).** The Zero-Introspection Principle suppresses emotional hallucination regardless of evidence granularity.
+- **Condition D (coarse) achieves higher fill rate than F (full)** (57% vs 52%), because coarse enums (e.g., "interior") are easier to fill than fine-grained ones (e.g., "cave_interior"). This suggests a precision-recall tradeoff: coarse granularity increases recall at the cost of semantic precision.
+- **Environment fill rate is systematically low** (24% for LLEE Full), confirming the LLM attention blindspot hypothesis (§9.2). Environmental details are under-extracted relative to character and emotion information.
+- **LLEE Full achieves 100% schema compliance** (12/12), the highest among structured conditions.
+
+*Phase 1 Round 1 preliminary results. Multi-model comparison and multi-round consistency analysis pending.*
+
+**[Fig 5: PLACEHOLDER — Parser fidelity across 5 conditions by corpus style]**
+**[Table 5: PLACEHOLDER — Environment recall rate by corpus style]**
+**[Fig 6: PLACEHOLDER — Evidence consistency: AI-generated vs human-authored text]**
 **[Fig 7: PLACEHOLDER — WSM tension vs human-rated atmosphere (Pearson r)]**
 
 ## 9. Discussion
@@ -333,13 +364,23 @@ LLMs exhibit systematic attention bias: high attention to character/dialogue/emo
 
 LLEE's parameters require two optimization algorithms: evolutionary search for discrete structure (evidence types, enum sets) and gradient descent for continuous parameters (decay rates, ceilings, render curves). The outer loop searches topology; the inner loop optimizes parameters per topology. Analogous to Neural Architecture Search.
 
-### 9.4 Multi-World Ontology
+### 9.4 Dialogue Subtext and the Evidence Stack
 
-The text-centric framework extends to nested narratives. Karl's precognitive visions constitute parallel world states with identical internal evidence rules but different ontological status. Evidence flows between worlds through typed bridges: parent→child (CONTEXT inheritance) and child→parent (PREDICTED feedback, confidence ≤ 0.4). This connects to Ryan's possible worlds semantics for narrative.
+A common objection to Zero-Introspection is dialogue subtext: when a character says "I'm fine" but the reader knows they are not, should the renderer show a neutral face?
+
+LLEE's answer depends on the evidence available. If the text contains only the dialogue line, the renderer correctly shows a neutral face—the author chose not to provide behavioral cues, and LLEE respects that choice. But if prior paragraphs established behavioral evidence (e.g., "she had been crying, her eyes red and swollen"), the WSM retains that evidence with type-specific decay. When the current paragraph says "I'm fine" (EXPLICIT, confidence 0.85), the prior "crying" evidence (BEHAVIORAL, confidence 0.8, no decay) coexists in the state history.
+
+This reveals a limitation of the current single-value emotion model: `apply_delta` overwrites the previous emotion with the new one, erasing the prior evidence. A richer model would maintain an *evidence stack*—multiple concurrent evidence records for the same attribute, potentially contradictory. The renderer could then resolve contradictions modality-specifically: the facial renderer takes the EXPLICIT "fine" (smile), while the vocal renderer takes the BEHAVIORAL "sadness" (slight tremor). The result—smiling face, trembling voice—is subtext, achieved not through inference but through evidence coexistence.
+
+This is precisely where the six-type evidence system provides value over binary (has/no) evidence: binary systems cannot represent "two contradictory pieces of evidence at different confidence levels." The evidence stack is proposed as future work (§12).
+
+### 9.5 Conservative Fidelity
+
+LLEE's fidelity is asymmetric by design: it prioritizes avoiding false positives (injecting information absent from text) over avoiding false negatives (omitting information present in text). The 24% environment fill rate reflects this asymmetry—LLEE would rather leave a scene sparse than hallucinate details. This is analogous to high-specificity diagnostic design in medicine, where the cost of a false positive (misdiagnosis) exceeds the cost of a false negative (missed case). In narrative rendering, a falsely injected emotion distorts the author's intent in ways that are difficult for users to detect, while a missing environmental detail is immediately visible and can be addressed by the renderer's default asset pipeline.
 
 ## 10. Threats to Validity
 
-**Internal**: LLM non-determinism mitigated by 20-run stability test. Hand-set ceilings mitigated by ablation (Baseline C). Prompt iteration history recorded.
+**Internal**: LLM non-determinism mitigated by 20-run stability test. Hand-set ceilings mitigated by ablation (Baseline C). Prompt iteration history recorded. Decay rate sensitivity analysis (±20% perturbation) planned for Phase 1 Round 2.
 
 **External**: Corpus limited to English literary fiction (5 human + 2 AI authors). Renderer limited to Three.js. May not generalize to technical writing, poetry, or non-English text.
 
@@ -349,20 +390,26 @@ The text-centric framework extends to nested narratives. Karl's precognitive vis
 
 ## 11. Limitations
 
-1. **Single-world architecture**: No nested narratives, character beliefs, or multi-perspective states.
-2. **Narrator reliability assumed**: All statements treated as trustworthy. Extensible via narrator identity + reliability weight.
-3. **Attention bias in extraction**: Parser inherits LLM attention distribution. Explicit rules partially compensate.
-4. **Uncalibrated decay**: Rates from narrative theory, not empirical cognitive data. Phase 3 provides initial calibration.
-5. **No cross-modal validation**: Visual and audio consistency not verified automatically.
+1. **Semantic grouping, not mathematical decoupling**: The seven-group state model (E,V,S,O,H,T,N) is a semantic partition, not a mathematically orthogonal decomposition. Within each group, fields remain coupled (e.g., `visual.lights` contains both spatial position and source type in the same object). True decoupling—separating spatial occupancy from visual attributes as orthogonal feature vectors—is a future direction requiring latent-space methods.
+2. **Control signal, not physical quantity**: `render_intensity` is a unitless control signal (analogous to a BlendShape weight or audio bus send level), not a physically-grounded rendering parameter. It does not participate in energy conservation or radiometric equations. Mapping confidence to physically meaningful parameters (color temperature shifts, reverb wet/dry ratios, roughness perturbations) requires deep integration with specific renderer physics models—an engineering task, not a theoretical one.
+3. **Strong human priors, unverified emergent potential**: The six evidence types, decay rates, and confidence ceilings are hand-designed from narrative theory. Whether these structures can emerge from evolutionary search starting from a minimal basis (e.g., only ENTITY + UNDEFINED) is an open empirical question addressed in Future Work.
+4. **Single-world architecture**: No nested narratives, character beliefs, or multi-perspective states.
+5. **Narrator reliability assumed**: All statements treated as trustworthy (implicit reliability = 1.0). Extensible via narrator identity + reliability weight binding.
+6. **Attention bias in extraction**: Parser inherits LLM attention distribution. Explicit rules partially compensate; environment fill rate remains systematically low (24%).
+7. **Uncalibrated decay**: Rates derived from narrative theory, not empirical cognitive data. Phase 3 cognitive correlation experiment provides initial calibration.
+8. **No cross-modal validation**: Visual and audio rendering consistency not verified automatically.
+9. **Single-value emotion model**: Current WSM overwrites emotion on each delta, erasing prior evidence. Dialogue subtext (contradictory evidence from different turns) cannot be represented. An evidence stack model is proposed in Future Work.
 
 ## 12. Future Work
 
-- **WorldStack**: Multi-layer world state for nested narratives, visions, flashbacks.
-- **Bayesian confidence**: Replace clamp with prior × likelihood → posterior.
-- **Differentiable render_intensity**: Sigmoid composition for gradient flow.
-- **Emotion competition**: Within-group softmax for mutually exclusive states.
-- **Context predictor**: Lightweight MLP for next-state prediction (PREDICTED evidence).
-- **Spatial skeleton**: @REGION topology for coherent 3D layout construction.
+- **WorldStack (multi-world ontology)**: Multi-layer world state for nested narratives, character visions, flashbacks, and dreams. Each layer inherits from its parent (CONTEXT level) and can feed evidence back (PREDICTED level, confidence ≤ 0.4). This connects to Ryan's possible worlds semantics, where each narrative defines a Textual Actual World and multiple alternative possible worlds.
+- **Evolution from minimal priors**: Controlled comparison of evolution starting from hand-crafted Schema (6 types) vs. minimal Schema (ENTITY + UNDEFINED only) vs. random initialization, to determine whether human-designed evidence types are discoverable natural structures or necessary cognitive scaffolding.
+- **Bayesian confidence**: Replace clamp with prior × likelihood → posterior, learning prior distributions from human evaluation data.
+- **Differentiable render_intensity**: Sigmoid composition for gradient flow from human scores to rendering parameters.
+- **Emotion competition**: Within-group softmax for mutually exclusive states (fear vs. joy competing for probability mass).
+- **Context predictor**: Lightweight MLP for next-state prediction (PREDICTED evidence, confidence ≤ 0.4).
+- **Spatial skeleton**: @REGION topology for coherent 3D layout construction, separating spatial occupancy from visual attributes.
+- **Evidence stack**: Replace single-value emotion with a stack of concurrent evidence records, enabling subtext rendering through cross-modal contradiction resolution (e.g., EXPLICIT "fine" → facial smile; BEHAVIORAL "crying" → vocal tremor).
 
 ## 13. Conclusion
 

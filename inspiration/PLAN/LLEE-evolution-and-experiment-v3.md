@@ -375,6 +375,98 @@ Phase 0 只实现 E + V + S，O/H/T/N 用占位符。确认。
   □ 生成图表和统计检验结果
 
   ⚡ 里程碑 1：Parser 保真度数据可独立发表
+
+任务 1.3  Phase 1 Round 2（v0.7 数据需求）
+  □ 连续段落序列实验（展示衰减和六类型的跨段落价值）
+    - 选 3 组连续 5-8 段序列（Poe/Aladdin/Karl）
+    - 跑 5 条件，观察 ATMOSPHERIC 衰减轨迹 vs D 条件的粗粒度行为
+    - 这是回应 DeepSeek "六类型增量价值在序列不在单段" 的关键数据
+  □ 衰减率敏感性分析（±20% 扰动）
+    - 基线：ATMOSPHERIC=0.7, CONTEXTUAL=0.9
+    - 变体 +20%：ATMOSPHERIC=0.84, CONTEXTUAL=1.0
+    - 变体 -20%：ATMOSPHERIC=0.56, CONTEXTUAL=0.72
+    - 对已有 Delta 序列重新跑 WSM（不需要额外 API 调用）
+    - 观察 ATMOSPHERIC 状态平均持续回合数变化
+    - 如果 ±20% 导致持续回合数变化 > 50% → 参数高度敏感，需校准
+    - 如果变化 < 20% → 手设参数可接受
+  □ 跨模型对比（DeepSeek Chat / Claude Sonnet）
+    - 至少 12 段 × 2 模型 × 5 条件
+    - 对比填充率、IEI、证据一致性的模型间差异
+    - 回答 RQ4：AI 生成 vs 人类文本的证据分级差异
+  □ Condition D 的 IEI 定性分析
+    - 粗粒度枚举是否以更隐蔽方式泄漏情绪？
+    - 选 5 个 D 条件输出，人工逐例检查
+  □ Ground truth 标注完善
+    - 12 段落的 expected_env_features 标注
+    - 5 个状态检查点的完整世界状态 JSON
+
+  ⚡ 里程碑 1.5：v0.7 论文的完整 Parser 数据集
+```
+
+### Phase 1.7 — v0.7 论文写作准备（Gate 1.5 通过后）
+
+```
+任务 1.7.1  数学形式化（M1-M6，核心贡献）
+  □ M1：WSM 状态空间形式化
+    W = (E, V, S, O, H, T, N)
+    Δ = (Δ_E, Δ_V, ..., Δ_N)
+    W_{t+1} = WSM(W_t, Δ_t)  — 确定性状态转移，非预测性
+  □ M2：证据衰减方程
+    c_{t+1}(e) = decay_rate(level(e)) × c_t(e)
+    narrative_break 分段处理：ATMOSPHERIC→0, CONTEXTUAL×0.5
+  □ M3：置信度天花板（Zero-Introspection 的数学表达）
+    ∀t, ∀e: c_t(e) ≤ ceiling(level(e))
+  □ M4：IEI 的操作化定义
+    IEI(Δ, T) = 1 iff ∃a ∈ Δ.emotions: a ≠ UNDEFINED ∧ NoEvidence(T, a)
+  □ M5：填充率形式化（按模态分组）
+  □ M6：证据校准度（Cohen's Kappa）
+
+任务 1.7.2  渲染数学设计（v0.7 新增贡献）
+  □ render_intensity 从分段线性升级为 sigmoid 叠加
+    - 当前：if/elif 分段，无物理语义
+    - 目标：r(c) = σ(α(c - β))，其中 α=斜率, β=阈值
+    - 每种证据类型有独立的 (α, β) 参数
+    - 可微 → 打通从人类评分到渲染参数的梯度通路
+  □ 置信度→渲染参数的语义锚点设计
+    - 视觉：confidence → 光源色温偏移 ΔT_color = r(c) × T_range
+      例：tension=0.8 → 色温从 5600K 偏移到 3200K（暖→冷）
+    - 视觉：confidence → 雾效密度 fog_density = r(c) × d_max
+    - 音频：confidence → 混响 Wet/Dry 比例
+    - 音频：confidence → EQ 频段增益（低频增益 = tension 的函数）
+    - 这不是 PBR 级别的物理模型，但为每个渲染参数提供了
+      可解释的、可审计的数学映射（回应 GLM "数学裸奔"批评）
+  □ 证据栈（evidence stack）的渲染语义
+    - 当证据栈包含矛盾证据（fine + sadness）时：
+      不同渲染通道可以"观测"不同证据 → 潜台词渲染
+    - 面部通道取 max_confidence → fine（微笑）
+    - 声音通道取 BEHAVIORAL 证据 → sadness（声音微颤）
+    - 这是"量子测量类比"的工程落地
+  □ UNDEFINED 子类型的渲染语义
+    - UNDEFINED_ALEATORIC → 中性默认值，不可被上下文覆盖
+    - UNDEFINED_EPISTEMIC → 中性默认值，允许低强度上下文插值
+
+任务 1.7.3  理论延伸（Discussion / Future Work）
+  □ M7：衰减率的信息论解释
+    decay_rate(e) ≈ exp(-H(s_{t+1}^e | s_t^e))
+    当前手工值是对条件熵的近似，Phase 4 用数据估计
+  □ M8：不确定性分解
+    H_pred(s_t) = H_epistemic(s_t) + H_aleatoric(s_t)
+    IEI 的根源 = 混淆两种不确定性
+  □ M9：叙事分岔点的局部李雅普诺夫指数
+    λ_local(s_t) > 0 → 叙事分岔点，缩短状态继承
+    仅在 Phase 4 预测器实现后适用
+
+任务 1.7.4  v0.7 论文撰写
+  □ 在 v0.6 基础上升级，不是重写
+  □ 新增 §4 Mathematical Framework（M1-M4）
+  □ 新增 §6.5 Rendering Mathematics（渲染数学设计）
+  □ §8 Results 用 Round 2 数据替换/补充 Round 1
+  □ §9 Discussion 加入 M7-M9 的理论延伸
+  □ §10 加入衰减率敏感性分析结果
+  □ §11 Limitations 加入 UNDEFINED 子类型拆分的讨论
+  □ 所有数学公式用 LaTeX 排版
+
+  ⚡ 里程碑 1.7：v0.7 论文草稿（含数学形式化 + 渲染设计）
 ```
 
 ### Phase 2 — 渲染 + 自动化评估（Week 5-8）
@@ -495,6 +587,15 @@ Phase 0 只实现 E + V + S，O/H/T/N 用占位符。确认。
   □ 进化后的 Schema vs 人类设计的 Schema：哪个适应度更高？
   □ 进化产生了哪些人类未曾想到的枚举细分？
   □ 这是"自进化世界语"的第一个实证数据点
+  □ 新增对照实验（回应"方向性错误"质疑）：
+    - 条件 E1：从手工 Schema（6 类证据）开始进化
+    - 条件 E2：从极简 Schema（ENTITY + UNDEFINED 两类）开始进化
+    - 条件 E3：从随机初始化 Schema 开始进化
+    - 如果 E2/E3 能独立收敛到类似 ATMOSPHERIC/CHARACTER 的结构
+      → 手工先验是可发现的自然结构，不是人为偏见
+    - 如果 E2/E3 无法发现这些结构
+      → 手工先验是必要的认知脚手架
+    - 这直接回答"强规则能否通向弱涌现"的问题
 
 任务 4.3  扩展渲染器
   □ Omniverse Kit SDK 集成（跳过 UE5）
@@ -502,8 +603,8 @@ Phase 0 只实现 E + V + S，O/H/T/N 用占位符。确认。
   □ 更多语料（其它公版文学）
 
 任务 4.4  可微化与梯度优化
-  □ render_intensity 从分段线性替换为 sigmoid 叠加（~10 行代码）
-    - 打通从人类评分到渲染参数的梯度通路
+  □ render_intensity sigmoid 叠加已在 Phase 1.7 设计、Phase 2 实现
+    - Phase 4 聚焦于用人类评分数据优化 sigmoid 参数 (α, β)
   □ 用 Phase 3 人类评分数据作为监督信号
   □ 梯度下降优化：source_weight、decay_factor、渲染强度映射曲线
   □ 保持离散等级不变（方案 C：内部连续，外部离散）
@@ -531,10 +632,18 @@ Phase 0 只实现 E + V + S，O/H/T/N 用占位符。确认。
 
 ```
 Gate 0 → Phase 1：语料验证通过？信息密度差异显著？
-Gate 0.5 → Phase 1：Prompt 稳定性通过？合规率 100%？
-Gate 1 → Phase 2：Parser 保真度数据是否支持核心假设？
+Gate 0.5 → Phase 1：Prompt 稳定性通过？合规率 ≥ 95%？
+Gate 1 → Phase 1.3：Parser 保真度数据是否支持核心假设？
   - 如果 IEI 泄漏率 > 20% → 回退修改 prompt
   - 如果填充率差异不显著 → 回退检查语料
+Gate 1.5 → Phase 1.7：Round 2 数据是否充分？
+  - 连续序列实验完成？衰减轨迹可视化？
+  - 敏感性分析完成？参数稳定性可接受？
+  - 至少 2 个模型的跨模型对比完成？
+  - 如果数据不充分 → 继续补充实验，不进入论文写作
+Gate 1.7 → Phase 2：v0.7 论文草稿完成？数学形式化通过自审？
+  - M1-M4 是否每个都有对应的代码实现或实验数据支撑？
+  - 渲染数学设计是否可以在 Phase 2 中直接实现？
 Gate 2 → Phase 3：渲染质量感知测试通过？
   - 如果不通过 → 调整渲染策略或改为定性研究
 Gate 3 → Phase 4：论文核心数据是否足够？
@@ -549,9 +658,11 @@ Gate 3 → Phase 4：论文核心数据是否足够？
 ```
 Week 1-2    Phase 0     语料验证 + Schema 定义 + 技术选型
 Week 2-3    Phase 0.5   Prompt 稳定性验证（3-5 天）
-Week 3-5    Phase 1     Parser 管道 + 保真度实验 ← 第一个可发布结果
-Week 5-8    Phase 2     渲染 + 自动化评估 + 演示视频
-Week 8-11   Phase 3     人类评估 + 论文撰写
+Week 3-4    Phase 1     Parser 管道 + 保真度实验 Round 1 ← 第一个可发布结果
+Week 4-5    Phase 1.3   Round 2：连续序列 + 敏感性分析 + 跨模型对比
+Week 5-6    Phase 1.7   v0.7 论文写作：数学形式化 + 渲染数学设计
+Week 6-9    Phase 2     渲染实现（sigmoid render_intensity + 语义锚点）+ 自动化评估
+Week 9-12   Phase 3     人类评估 + 论文终稿
 Week 12+    Phase 4     进化实验 + 扩展（可选）
 ```
 

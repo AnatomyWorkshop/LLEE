@@ -1,0 +1,128 @@
+{
+  "timestamp": "20260423-163755",
+  "provider": "deepseek-chat",
+  "model": "deepseek-chat",
+  "condition": "C",
+  "segments": {
+    "aladdin_cave_sparse": {
+      "condition": "C",
+      "schema_valid": false,
+      "fill_rate": 0.412,
+      "env_fill_rate": 0.0,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entity_updates': [{'entity_id': 'aladdin', 'attributes': {'location': {'value': 'beautiful gardens outside city gates', 'evidence': 'explicit'}, 'companion': {'value': 'the magician', 'evidence': 'explicit'}, 'activity': {'value': 'walking, sitting, eating cake', 'evidence': 'explicit'}}}, {'entit"
+    },
+    "aladdin_lamp_sparse": {
+      "condition": "C",
+      "schema_valid": false,
+      "fill_rate": 0.556,
+      "env_fill_rate": 0.0,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entity_updates': [{'name': 'Aladdin', 'state': 'trapped', 'evidence': 'explicit', 'confidence': 0.7, 'attributes': {'location': 'dark place', 'emotional_state': 'crying and lamenting', 'action': 'clasped hands in prayer, rubbed ring'}}, {'name': 'Magician', 'state': 'absent', 'evidence': 'explicit"
+    },
+    "usher_approach_rich": {
+      "condition": "C",
+      "schema_valid": false,
+      "fill_rate": 0.6,
+      "env_fill_rate": 0.143,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entity_updates': [{'name': 'Narrator', 'type': 'character', 'state': 'traveling alone on horseback', 'evidence': 'explicit'}, {'name': 'House of Usher', 'type': 'location', 'state': 'melancholy, viewed at evening', 'evidence': 'explicit'}], 'visual': {'lighting': {'value': 'dim, evening shades', '"
+    },
+    "masque_rooms_rich": {
+      "condition": "C",
+      "schema_valid": false,
+      "fill_rate": 0.149,
+      "env_fill_rate": 0.143,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entity_updates': [{'name': 'apartments', 'type': 'location', 'attributes': {'layout': {'value': 'irregularly disposed with sharp turns every 20-30 yards', 'evidence': 'explicit'}, 'count': {'value': 7, 'evidence': 'explicit'}}}, {'name': 'apartment_1', 'type': 'room', 'attributes': {'position': {'"
+    },
+    "cask_unreliable_narrator": {
+      "condition": "C",
+      "schema_valid": false,
+      "fill_rate": 0.444,
+      "env_fill_rate": 0.143,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entity_updates': [{'name': 'narrator', 'type': 'person', 'attributes': {'emotion': {'value': 'pleased', 'confidence': 0.7, 'evidence': 'explicit'}, 'action': {'value': 'wringing hand', 'confidence': 0.7, 'evidence': 'explicit'}}}, {'name': 'friend', 'type': 'person', 'attributes': {'clothing': {'v"
+    },
+    "cthulhu_opening_philosophical": {
+      "condition": "C",
+      "schema_valid": false,
+      "fill_rate": 1.0,
+      "env_fill_rate": 0.143,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entity_updates': {'narrator': {'identity': {'value': 'first-person singular (I)', 'evidence': 'explicit'}, 'emotional_state': {'value': 'contemplative, foreboding', 'evidence': 'atmospheric'}}, 'humanity': {'identity': {'value': 'collective human mind', 'evidence': 'explicit'}, 'cognitive_state': "
+    },
+    "ackroyd_breakfast_neutral": {
+      "condition": "C",
+      "schema_valid": false,
+      "fill_rate": 0.412,
+      "env_fill_rate": 0.0,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entity_updates': [{'name': 'James', 'type': 'person', 'properties': {'location': {'value': 'dining-room area', 'evidence': 'contextual'}, 'presence': {'value': 'present', 'evidence': 'explicit'}}}, {'name': 'Caroline', 'type': 'person', 'properties': {'location': {'value': 'dining-room', 'evidence"
+    },
+    "sakakibara_classroom_rich": {
+      "condition": "C",
+      "schema_valid": false,
+      "fill_rate": 1.0,
+      "env_fill_rate": 0.286,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entity_updates': {'classroom': {'type': 'location', 'attributes': {'occupancy': {'value': 34, 'confidence': 0.7, 'evidence': 'explicit'}, 'desk_arrangement': {'value': 'grid', 'confidence': 0.7, 'evidence': 'explicit'}, 'desk_rows': {'value': 15, 'confidence': 0.7, 'evidence': 'explicit'}, 'window"
+    },
+    "sakakibara_classroom_sparse": {
+      "condition": "C",
+      "schema_valid": false,
+      "fill_rate": 0.643,
+      "env_fill_rate": 0.0,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entity_updates': [{'entity_id': 'sakakibara_kaito', 'name': 'Sakakibara Kaito', 'properties': {'focus': {'value': 'staring at kanji 影 (kage)', 'confidence': 0.7, 'evidence': 'explicit'}, 'duration_of_action': {'value': 'eleven minutes', 'confidence': 0.7, 'evidence': 'explicit'}, 'mental_state': {"
+    },
+    "karl_classroom_sensory": {
+      "condition": "C",
+      "schema_valid": false,
+      "fill_rate": 0.349,
+      "env_fill_rate": 0.0,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entity_updates': [{'name': 'player', 'state': 'standing', 'evidence': 'behavioral', 'confidence': 0.7}, {'name': 'player', 'state': 'heavy_body_feeling', 'evidence': 'behavioral', 'confidence': 0.7}, {'name': 'player', 'state': 'near_window', 'evidence': 'behavioral', 'confidence': 0.7}, {'name': "
+    },
+    "karl_hallway_social": {
+      "condition": "C",
+      "schema_valid": false,
+      "fill_rate": 0.385,
+      "env_fill_rate": 0.0,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entity_updates': [{'name': 'player', 'state': 'anonymous face in the crowd', 'evidence': 'explicit'}, {'name': 'player', 'state': 'not a zero', 'evidence': 'character'}, {'name': 'player', 'state': \"kid who burned his dad's roses\", 'evidence': 'character'}, {'name': 'crowd', 'state': 'chaotic rive"
+    },
+    "karl_panic_internal": {
+      "condition": "C",
+      "schema_valid": false,
+      "fill_rate": 0.205,
+      "env_fill_rate": 0.0,
+      "iei_leak": false,
+      "evidence_levels": [],
+      "emotion_labels": [],
+      "output_preview": "{'entity_updates': [{'entity': 'player', 'attribute': 'mental_state', 'value': 'blank', 'evidence': 'explicit'}, {'entity': 'player', 'attribute': 'memory', 'value': 'void', 'evidence': 'explicit'}, {'entity': 'player', 'attribute': 'emotional_state', 'value': 'distressed', 'evidence': 'behavioral'}"
+    }
+  }
+}
